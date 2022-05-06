@@ -1,4 +1,4 @@
-const index = require('../index.js');
+const questions = require('../index.js');
 
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
@@ -13,9 +13,9 @@ function renderLicenseLink(license) {}
 function renderLicenseSection(license) {}
 
 // TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
+const generateMarkdown = () => {
   return `
-  # ${projectName}
+  # ${projName}
 
     ${projectDesc}
     
@@ -26,7 +26,7 @@ function generateMarkdown(data) {
     * [License](#License)
     * [Contributing](#Contributing)
     * [Tests](#Tests)
-    * [Questions](#Questions)
+    * [(#
     
     ### Installation
 

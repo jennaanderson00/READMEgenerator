@@ -22,7 +22,7 @@
     choosing a license will place a badge for that license near the top of the README */
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateMarkdown = require('./src/template');
+const generateMarkdown = require('./src/template.js');
 
 const questions = () => {
     return inquirer.prompt([
@@ -93,6 +93,7 @@ const questions = () => {
     ]);
 };
 
+
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
     fs.writeFile('dist/README.md', generateMarkdown());
@@ -104,5 +105,3 @@ function init() {}
 // Function call to initialize app
 questions()
 .then(writeToFile);
-
-module.exports = inquirer.prompt;
