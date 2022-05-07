@@ -105,4 +105,7 @@ function init() {}
 
 // Function call to initialize app
 questions()
-.then(writeToFile);
+.then((answers) => {
+    return generateMarkdown(answers);
+})
+// .then(writeToFile);
