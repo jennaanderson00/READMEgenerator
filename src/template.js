@@ -15,7 +15,7 @@ function renderLicenseSection(license) {}
 // TODO: Create a function to generate markdown for README
 const generateMarkdown = (questions) => {
   return `
-  # ${projName}
+  # ${projectName}
 
     ${projectDesc}
     
