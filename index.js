@@ -1,29 +1,9 @@
-/* CRITERIA
-    application generates a README file with the following:
-        project title
-            input: project title
-                description
-                table of contents
-                    contains links directing Users to corresponding section of the README
-                installation
-                    input: installation instructions
-                usage
-                    input: usage information
-                license
-                    license notice
-                contributing
-                    input: contribution guidelines
-                tests
-                    input: test instructions
-                questions
-                    input: GitHub username, email address
-                    link to GitHub profile
-                    instructions on how to contact via email
-    choosing a license will place a badge for that license near the top of the README */
+// packages
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generateMarkdown = require('./src/template.js');
 
+// command line prompt to get User data
 const questions = () => {
     return inquirer.prompt([
         {
@@ -47,7 +27,7 @@ const questions = () => {
             message: 'Please provide usage details for your project.'
         },
         {
-            type: 'checkbox',
+            type: 'list',
             name: 'license',
             message: 'Please select a License for your project from the options below.',
             choices: ['Apache License 2.0', 'BSD 3-Clause', 'GNU General Public License (GPL) v3', 'MIT License', 'Mozilla Public License 2.0']
@@ -93,9 +73,10 @@ const questions = () => {
     ]);
 };
 
+// export module
 module.exports = questions;
 
-// TODO: Create a function to write README file
+// write README file
 const writeFile = fileContent => {
     return new Promise((resolve, reject) => {
         fs.writeFile('dist/README.md', fileContent, err => {
@@ -114,10 +95,7 @@ const writeFile = fileContent => {
     });
 };
 
-// TODO: Create a function to initialize app
-function init() {}
-
-// Function call to initialize app
+// initialize app
 questions()
 .then((answers) => {
     return generateMarkdown(answers);

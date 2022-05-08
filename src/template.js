@@ -1,7 +1,7 @@
+// require index script with User data prompts
 const questions = require('../index.js');
 
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
+// generate license badge to match User license
 function renderLicenseBadge(license) {
   if (license === 'Apache License 2.0') {
     return '[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)';
@@ -18,15 +18,29 @@ function renderLicenseBadge(license) {
   };
 };
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-// function renderLicenseLink(license) {}
+// generate license link to match User license
+function renderLicenseLink(license) {
+  if (license === 'Apache License 2.0') {
+    return 'http://www.apache.org/licenses/';
+  } else if (license === 'BSD 3-Clause') {
+    return 'https://opensource.org/licenses/BSD-3-Clause';
+  } else if (license === 'GNU General Public License (GPL) v3') {
+    return 'https://www.gnu.org/licenses/gpl-3.0.en.html';
+  } else if (license === 'MIT License') {
+    return 'https://opensource.org/licenses/MIT';
+  } else if (license === 'Mozilla Public License 2.0') {
+    return 'https://opensource.org/licenses/MPL-2.0';
+  } else {
+    return '';
+  };
+}
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-// function renderLicenseSection(license) {}
+// generate license section containing the name of the User license and link
+function renderLicenseSection(license) {
+  return license + ' ' + renderLicenseLink(license);
+}
 
-// TODO: Create a function to generate markdown for README
+// generate markdown data based on User answers
 const generateMarkdown = (data) => {
   return `# ${data.projectName} 
   ${renderLicenseBadge(data.license)}
@@ -52,7 +66,7 @@ const generateMarkdown = (data) => {
     
   ### License
 
-  ${data.license}
+  ${renderLicenseSection(data.license)}
     
   ### Contributing
 
@@ -69,4 +83,5 @@ const generateMarkdown = (data) => {
   ${data.contactInst}`;
 }
 
+// export module
 module.exports = generateMarkdown;
