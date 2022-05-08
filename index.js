@@ -48,7 +48,7 @@ const questions = () => {
         },
         {
             type: 'checkbox',
-            name: 'licenseOptions',
+            name: 'license',
             message: 'Please select a License for your project from the options below.',
             choices: ['Apache License 2.0', 'BSD 3-Clause', 'GNU General Public License (GPL) v3', 'MIT License', 'Mozilla Public License 2.0']
         },
@@ -96,9 +96,23 @@ const questions = () => {
 module.exports = questions;
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-    fs.writeFile('dist/README.md', generateMarkdown());
-}
+const writeFile = fileContent => {
+    return new Promise((resolve, reject) => {
+        fs.writeFile('dist/README.md', fileContent, err => {
+            // if an error occurs, reject Promise and send the error to the catch method
+            if (err) {
+                reject(err);
+                // return to ensure Promise does not execute the resolve function
+                return;
+            }
+            // resolve Promise and send data to the then method
+            resolve({
+                ok: true,
+                message: 'File created!'
+            });
+        });
+    });
+};
 
 // TODO: Create a function to initialize app
 function init() {}
@@ -108,4 +122,6 @@ questions()
 .then((answers) => {
     return generateMarkdown(answers);
 })
-// .then(writeToFile);
+.then(generateMarkdown => {
+    return writeFile(generateMarkdown);
+});
